@@ -2,13 +2,17 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    margin-right: 20px;
 }
 
 input{
-    width: 20%;
-    height: 35px;
+    height: 30px;
+    width: 100%;
     font-size: 16px;
     border-radius: 5px;
     border: 0.4px solid ;
     background-color: rgba(240, 240, 240, 0.952);
+}
+::placeholder{
+    font-size: 10px;
 }

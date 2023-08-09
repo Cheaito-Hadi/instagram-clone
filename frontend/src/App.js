@@ -1,12 +1,11 @@
 import './App.css';
-import Post from './Components/Card';
-import Input from './Components/Input';
+import SignUp from './Pages/SignUp';
+
 
 function App() {
   return (
     <div>
-      <Post />
-      <Input />
+      <SignUp />
     </div>
       
   );
