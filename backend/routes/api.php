@@ -12,3 +12,4 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::post('/create_post', [PostController::class, "createPost"]);
+Route::get('/get_posts', [PostController::class, "getPosts"]);

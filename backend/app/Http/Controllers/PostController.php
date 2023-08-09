@@ -17,6 +17,22 @@ class PostController extends Controller
         $post->image_url = storage_path("images")."\\".$file_name;
         $post->save();
 
-        return response()->json();
+        return response()->json([
+            "status" => "success", 
+            "data" => $post
+        ]);
     }
+
+    public function getPosts(){
+        $posts = Post::all();
+        foreach ($posts as $post) {
+            $image64 = base64_encode(@file_get_contents($post->image_url));
+            $post -> image_url = $image64;
+        }
+        return response()->json([
+            "status" => "success",
+            "data" => $posts
+        ]);
+    }
+    
 }
