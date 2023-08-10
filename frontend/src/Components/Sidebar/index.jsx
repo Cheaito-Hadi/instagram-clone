@@ -45,12 +45,12 @@ function SideBar() {
         event.preventDefault();
 
         const formData = new FormData();
-        formData.append("description", textInput);
-        formData.append("image_path", fileInput);
+        formData.append("caption", textInput);
+        formData.append("image_url", fileInput);
 
         try {
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/add_post",
+                "http://127.0.0.1:8000/api/create_post",
                 formData,
                 {
                     headers: {
@@ -67,15 +67,19 @@ function SideBar() {
     };
 
     const handleSearch = async () => {
-        const response = await axios.get(
-            `http://127.0.0.1:8000/api/search/${data.username}`,
-            {
-                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        try {
+            const response = await axios.post(
+                `http://127.0.0.1:8000/api/search/${data.username}`,
+                {
+                    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+                }
+            );
+            const users = response.data.users;
+            if (users) {
+                setSearchedUsers(users);
             }
-        );
-        const users = response.data.users;
-        if (users) {
-            setSearchedUsers(users);
+        } catch (error) {
+            console.error("Error fetching data:", error);
         }
     };
   return (
@@ -86,7 +90,7 @@ function SideBar() {
             <div className="sidebar-links">
                 <ul>
                     <li>
-                        <a
+                        <button
                             title="Create"
                             onClick={() => {
                                 setIsMounted(!isMounted);
@@ -99,7 +103,7 @@ function SideBar() {
                         >
                             <CreateIcon/>
                             <span className="link hide">Create</span>
-                        </a>
+                        </button>
                         {
 
                             showDiv && (
@@ -111,7 +115,7 @@ function SideBar() {
                                     }}
                                 >
                                     <Inputs
-                                        name={"description"}
+                                        name={"caption"}
                                         type={"text"}
                                         label={"Write a caption"}
                                         placeholder={"write a caption"}
@@ -119,7 +123,7 @@ function SideBar() {
                                         onChange={handleTextChange}
                                     />
                                     <Inputs
-                                        name="image_path"
+                                        name="image_url"
                                         type={"file"}
                                         label={"Choose an image"}
                                         onChange={handleFileChange}
@@ -146,7 +150,6 @@ function SideBar() {
                                     key={user.id}
                                     username={user.username}
                                     userFullName={user.name}
-                                    following={user.is_following}
                                 />
                             ))}
                         </div>
@@ -162,7 +165,6 @@ function SideBar() {
                     </div>
                     <section className="avatar__name hide">
                         <div className="user-name">Welcome</div>
-                        <div className="email">This is not the real Instagram site</div>
                     </section>
                 </div>
             </div>

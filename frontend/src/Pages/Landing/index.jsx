@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Post from '../../Components/Post/index';
 import SideBar from '../../Components/Sidebar/index';
+import './Landing.css'
 
 const Landing = () => {
   const [posts, setPosts] = useState([]);
@@ -23,9 +24,9 @@ const Landing = () => {
 
   return (
     <>
-    <SideBar />
+    <div className="sidebar"><SideBar /></div>
+    
     <div className="container">
-      
       {posts.map((post) => (
         <Post key={post.id} 
         post_id={post}
