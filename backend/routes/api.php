@@ -20,4 +20,5 @@ Route::post('/follow/{username}', [UserController::class, 'followUser']);
 Route::post('/unfollow/{username}', [UserController::class, 'unfollowUser']);
 Route::post('/search/{username}', [UserController::class, 'searchUser']);
 Route::post('/like/{post_id}', [LikeController::class, 'likePost']);
+Route::post('/unlike/{post_id}', [LikeController::class, 'unlikePost']);
 

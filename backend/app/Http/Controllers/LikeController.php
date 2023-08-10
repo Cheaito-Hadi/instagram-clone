@@ -27,4 +27,16 @@ class LikeController extends Controller
         $like->save();
         return response()->json(['status' => 'Liked the post successfully']);
     }
+
+    public function unlikePost($post_id)
+    {
+        $user_id = Auth::id();
+        $post = Post::find($post_id);
+        if (!$post) {
+            return response()->json(['status' => 'Post was not found']);
+        }
+        $existingLike = Like::where('user_id', $user_id)->where('post_id', $post_id)->first();
+        $existingLike->delete();
+        return response()->json(['status' => 'Unliked the post successfully']);
+    }
 }
