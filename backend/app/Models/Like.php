@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     public function likedBy() {
-        return $this -> belongsTo(User::class);
+        return $this -> belongsTo(User::class, "user_id");
     }
     
     public function liked(){
-        return $this -> belongsTo(Post::class);
+        return $this -> belongsTo(Post::class, "post_id");
     }
 }
