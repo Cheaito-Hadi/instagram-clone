@@ -17,4 +17,14 @@ class UserController extends Controller
         }
         return response()->json(['status' => 'Could not follow']);
     }
+
+    function unfollowing($username) {
+        $logged_user = Auth::user();
+        $unfollowed_user = User::where('username', $username)->first();
+        if($unfollowed_user){
+            $logged_user->unfollowed()->detach($unfollowed_user->id);
+            return response()->json(['status' => 'Unfollowed done']);
+        }
+        return response()->json(['status' => 'Could not unfollow']);
+    }
 }

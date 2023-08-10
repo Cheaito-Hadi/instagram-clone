@@ -17,4 +17,5 @@ Route::post('/create_post', [PostController::class, "createPost"]);
 Route::get('/get_posts', [PostController::class, "getPosts"]);
 Route::get('/get_posts', [PostController::class, "getPosts"]);
 Route::post('/follow/{username}', [UserController::class, 'following']);
+Route::post('/unfollow/{username}', [UserController::class, 'unfollowing']);
 
