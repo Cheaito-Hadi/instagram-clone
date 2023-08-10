@@ -1,8 +1,10 @@
 import React from "react";
-import "./Card.css";
+import "./Post.css";
 
-const PostCard = () => {
+const PostCard = ({post_id, caption, image_url, poster, likes}) => {
+
   return (
+
     <div className="card-frame">
       <div className="profile-container">
         <div className="picture">
@@ -25,9 +27,11 @@ const PostCard = () => {
             />
           </svg>
         </div>
-        <div className="name">Hadi Cheaito</div>
+        {/* username */}
+        <div className="name">Hadi Cheaito</div> 
       </div>
       <div>
+        {/* image */}
         <img className="post" src="/profileTest.jpg" alt="post" />
       </div>
       <div className="likes-container">
@@ -48,11 +52,14 @@ const PostCard = () => {
             />
           </svg>
         </div>
+        {/* likes */}
         <div className="nb-likes">100 Likes</div>
       </div>
+      {/* username */}
       <div className="caption-name">
         Hadi Cheaito
       </div>
+      {/* caption */}
       <p className="caption">
       is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
       </p>

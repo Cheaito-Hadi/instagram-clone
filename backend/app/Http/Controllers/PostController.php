@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -24,16 +25,20 @@ class PostController extends Controller
         ]);
     }
 
-    public function getPosts()
-    {
-        $posts = Post::all();
-        foreach ($posts as $post) {
-            $image64 = base64_encode(@file_get_contents($post->image_url));
-            $post->image_url = $image64;
+    public function getPosts(){
+        $user = Auth::user();
+        $posts = Post::whereIn('user_id', $user->follower->pluck('id'))->orderBy('created_at', 'desc')->get();
+        foreach ($posts as $post){
+            $image64 = base64_encode(file_get_contents($post->image_url));
+            $post -> image_url = $image64;
+            $post -> likes;
+            $post -> likes_count = count($post -> likes);
+            $post->username = User::where('id', $post->user_id)->first()->username;
+            unset($post->user_id);
         }
         return response()->json([
-            "status" => "success",
-            "data" => $posts
+            'status' => 'success',
+            'posts' => $posts,
         ]);
     }
 }

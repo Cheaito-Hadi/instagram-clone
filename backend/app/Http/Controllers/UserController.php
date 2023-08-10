@@ -25,7 +25,7 @@ class UserController extends Controller
         $loggedUser = Auth::user();
         $unfollowedUser = User::where('username', $username)->first();
         if ($unfollowedUser) {
-            $loggedUser->unfollowed()->detach($unfollowedUser->id);
+            $loggedUser->follower()->detach($unfollowedUser->id);
             return response()->json(['status' => 'Unfollowed successfully']);
         }
         return response()->json(['status' => 'User not found or could not unfollow']);
