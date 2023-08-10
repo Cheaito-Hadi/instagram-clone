@@ -1,10 +1,8 @@
 import React from "react";
 import "./Post.css";
 
-const PostCard = ({post_id, uploader, caption, image_url, likes}) => {
-
+const PostCard = ({ post_id, uploader, caption, image_url, likes }) => {
   return (
-
     <div className="card-frame">
       <div className="profile-container">
         <div className="picture">
@@ -27,12 +25,14 @@ const PostCard = ({post_id, uploader, caption, image_url, likes}) => {
             />
           </svg>
         </div>
-        {/* username */}
-        <div className="name">{uploader}</div> 
+        <div className="name">{uploader}</div>
       </div>
       <div>
-        {/* image */}
-        <img className="post" src="/profileTest.jpg" alt="post" />
+        <img
+          className="post"
+          src={`data:image/png;base64,${image_url}`}
+          alt="post"
+        />
       </div>
       <div className="likes-container">
         <div>
@@ -52,17 +52,10 @@ const PostCard = ({post_id, uploader, caption, image_url, likes}) => {
             />
           </svg>
         </div>
-        {/* likes */}
         <div className="nb-likes">{likes} Likes</div>
       </div>
-      {/* username */}
-      <div className="caption-name">
-        {uploader}
-      </div>
-      {/* caption */}
-      <p className="caption">
-      {caption}
-      </p>
+      <div className="caption-name">{uploader}</div>
+      <p className="caption">{caption}</p>
     </div>
   );
 };
