@@ -64,15 +64,11 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function likes(){
-        return $this -> hasMany(Like::class);
+        return $this -> hasMany(Like::class, 'likes', 'user_id', 'post_id');
     }
 
     public function follower(){
-        return $this -> hasMany(Follow::class);
-    }    
-
-    public function followed (){
-        return $this -> hasMany(Follow::class);
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
     }
 
     public function postedBy() {
