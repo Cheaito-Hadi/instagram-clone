@@ -6,6 +6,7 @@ import Landing from './Pages/Landing';
 function App() {
   return (
     <div>
+      <Login />
       <Landing />
     </div>
       
