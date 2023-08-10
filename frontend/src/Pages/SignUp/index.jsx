@@ -3,8 +3,10 @@ import Input from "../../Components/Input";
 import { useState } from "react";
 import axios from "axios";
 import "./Signup.css";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
+  const navigate = useNavigate();
   const [info, setInfo] = useState({
     email: "",
     name: "",
@@ -18,8 +20,13 @@ function SignUp() {
 
   const submitUser = async () => {
     try {
-      await axios.post("http://127.0.0.1:8000/api/register", info);
+      const response = await axios.post("http://127.0.0.1:8000/api/register", info);
       console.log(info);
+      const message = response.data.message;
+      if (message ==='User created successfully'){
+        localStorage.setItem("token",response.data.user.token)
+      }
+      navigate("/landing")
     } catch (e) {
       console.log(e);
     }

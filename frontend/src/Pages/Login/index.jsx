@@ -3,8 +3,10 @@ import Input from "../../Components/Input";
 import "./Login.css";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -20,6 +22,7 @@ function Login() {
       if (message ==='Logged in'){
         localStorage.setItem("token",response.data.authorization.token)
       }
+      navigate("/landing")
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -47,6 +50,7 @@ function Login() {
         <button className="login-btn" onClick={handleLogin}>
           Log In
         </button>
+        <a href="/register">Dont have an account? Register here</a>
       </div>
     </div>
   );
